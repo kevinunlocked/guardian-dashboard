@@ -1,24 +1,25 @@
-import "../globals.css";
-import Sidebar from "../../components/Sidebar.jsx";
-import TopNav from "../../components/TopNav.jsx";
-import RightPanel from "../../components/RightPanel.jsx";
-
-export const metadata = {
-  title: "Guardian Dashboard",
-  description: "Unified security monitoring platform",
-};
+import Sidebar from "@/components/Sidebar";
+import Navbar from "@/components/Navbar";
 
 export default function DashboardLayout({ children }) {
   return (
-    <div className="flex min-h-screen bg-[#071026] text-slate-200">
+    <div className="flex min-h-screen bg-gray-50">
+      
+      {/* Sidebar */}
       <Sidebar />
 
-      <div className="flex flex-col flex-1">
-        <TopNav />
-        <main className="flex-1 overflow-auto p-6">{children}</main>
-      </div>
+      {/* Main content */}
+      <div className="flex-1 flex flex-col">
 
-      <RightPanel />
+        {/* Navbar */}
+        <Navbar />
+
+        {/* Page content */}
+        <main className="p-6">
+          {children}
+        </main>
+
+      </div>
     </div>
   );
 }
