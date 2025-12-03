@@ -1,0 +1,120 @@
+{
+  "company": {
+    "name": "Guardian Security",
+    "guards_on_duty": 142,
+    "sites_monitored": 96,
+    "vehicles_operational": 18,
+    "avg_response_time_minutes": 7.4
+  },
+  "sites": [
+    {
+      "site_id": "S101",
+      "name": "Cresta Sprayview",
+      "region": "Harare",
+      "latitude": -17.82,
+      "longitude": 31.015,
+      "type": "Retail",
+      "risk_history": [
+        3,
+        2,
+        4
+      ]
+    },
+    {
+      "site_id": "S102",
+      "name": "Borrowdale Brooke Estate",
+      "region": "Harare",
+      "latitude": -17.815,
+      "longitude": 31.02,
+      "type": "Residential",
+      "risk_history": [
+        1,
+        1,
+        2
+      ]
+    },
+    {
+      "site_id": "S103",
+      "name": "Chisipite Shopping Centre",
+      "region": "Harare",
+      "latitude": -17.81,
+      "longitude": 31.025,
+      "type": "Retail",
+      "risk_history": [
+        5,
+        4,
+        5
+      ]
+    }
+  ],
+  "guards": [
+    {
+      "id": "G001",
+      "name": "Tawanda Moyo",
+      "status": "On Duty",
+      "assigned_site": "S102",
+      "skills": [
+        "unarmed"
+      ],
+      "certs": [
+        "first-aid"
+      ],
+      "performance_score": 88
+    },
+    {
+      "id": "G002",
+      "name": "Anna Chirwa",
+      "status": "Available",
+      "assigned_site": null,
+      "skills": [
+        "armed"
+      ],
+      "certs": [
+        "firearm-cert"
+      ],
+      "performance_score": 92
+    }
+  ],
+  "rosters": [
+    {
+      "roster_id": "R001",
+      "site": "S101",
+      "shift": "day",
+      "guards": [
+        "G001"
+      ],
+      "notes": ""
+    }
+  ],
+  "incidents": [
+    {
+      "id": "INC-1001",
+      "date": "2025-11-30",
+      "site": "S101",
+      "type": "Intrusion",
+      "resolved": true,
+      "response_time": 6,
+      "report": "Door forced open",
+      "confidence": 0.87
+    },
+    {
+      "id": "INC-1002",
+      "date": "2025-12-01",
+      "site": "S102",
+      "type": "Fire",
+      "resolved": false,
+      "response_time": 11,
+      "report": "Small fire in storage",
+      "confidence": 0.65
+    }
+  ],
+  "contracts": [
+    {
+      "contract_id": "C001",
+      "site": "S101",
+      "client": "Client A",
+      "monthly_fee": 3500,
+      "target_guards": 2
+    }
+  ]
+}

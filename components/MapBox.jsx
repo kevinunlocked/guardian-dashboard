@@ -1,0 +1,64 @@
+'use client'
+import { useEffect, useRef } from 'react'
+import mapboxgl from 'mapbox-gl'
+import 'mapbox-gl/dist/mapbox-gl.css'
+
+mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN || ''
+
+function computeBounds(sites){
+  if(!sites || sites.length===0) return null
+  let minLng = Number.POSITIVE_INFINITY, minLat = Number.POSITIVE_INFINITY, maxLng = Number.NEGATIVE_INFINITY, maxLat = Number.NEGATIVE_INFINITY
+  sites.forEach(s=>{
+    if(typeof s.longitude !== 'number' || typeof s.latitude !== 'number') return
+    minLng = Math.min(minLng, s.longitude); maxLng = Math.max(maxLng, s.longitude)
+    minLat = Math.min(minLat, s.latitude); maxLat = Math.max(maxLat, s.latitude)
+  })
+  if(minLng===Number.POSITIVE_INFINITY) return null
+  return [[minLng, minLat],[maxLng, maxLat]]
+}
+
+export default function MapBox({ sites = [], risks = [] }) {
+  const ref = useRef(null)
+  const mapRef = useRef(null)
+
+  useEffect(()=>{
+    if(!ref.current) return
+    if(mapRef.current) return
+
+    mapRef.current = new mapboxgl.Map({
+      container: ref.current,
+      style: 'mapbox://styles/mapbox/dark-v11',
+      center: sites.length ? [sites[0].longitude, sites[0].latitude] : [31, -17.8],
+      zoom: sites.length ? 10 : 2
+    })
+
+    mapRef.current.on('load', ()=>{
+      const bounds = computeBounds(sites)
+      if(bounds){
+        try{ mapRef.current.fitBounds(bounds, { padding: 80, maxZoom: 14 }) }catch(e){}
+      }
+
+      sites.forEach(s=>{
+        if(typeof s.longitude !== 'number' || typeof s.latitude !== 'number') return
+        const r = (risks || []).find(x=>x.site_id === s.site_id) || {}
+        const score = r.risk_score || 0
+        const color = score >= 60 ? '#ef4444' : score >= 30 ? '#f59e0b' : '#10b981'
+        const el = document.createElement('div')
+        el.style.width = '18px'; el.style.height='18px'; el.style.borderRadius='6px'; el.style.background=color; el.style.boxShadow='0 4px 12px rgba(0,0,0,0.4)'
+        new mapboxgl.Marker(el).setLngLat([s.longitude, s.latitude]).setPopup(new mapboxgl.Popup({offset:12}).setHTML(`<strong>${s.name}</strong><div style="color:#bcd">${s.region||''}</div><div style="color:#bcd">Risk: ${score}</div>`)).addTo(mapRef.current)
+      })
+    })
+
+    return ()=>{ if(mapRef.current){ mapRef.current.remove(); mapRef.current = null } }
+  }, [sites, risks])
+
+  return (
+    <div style={{display:'flex',flexDirection:'column',height:'100%'}}>
+      <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:8}}>
+        <div style={{fontSize:12,color:'var(--muted)'}}>Map</div>
+        <div className="legend"><span className="marker-legend" style={{background:'#10b981'}}></span>Low <span style={{width:10}}></span><span className="marker-legend" style={{background:'#f59e0b'}}></span>Medium <span style={{width:10}}></span><span className="marker-legend" style={{background:'#ef4444'}}></span>High</div>
+      </div>
+      <div ref={ref} style={{flex:1,minHeight:240,borderRadius:12,overflow:'hidden'}}></div>
+    </div>
+  )
+}
