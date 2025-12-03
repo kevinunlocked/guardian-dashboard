@@ -1,35 +1,39 @@
 "use client";
 
-import { Shield, LayoutDashboard, Bell, Settings } from "lucide-react";
+import { Home, Map, BarChart3, FileText, Settings } from "lucide-react";
 import Link from "next/link";
 
 export default function Sidebar() {
+  const menu = [
+    { name: "Dashboard", icon: <Home size={18} />, href: "/dashboard" },
+    { name: "Map", icon: <Map size={18} />, href: "/dashboard/map" },
+    { name: "Analytics", icon: <BarChart3 size={18} />, href: "/dashboard/analytics" },
+    { name: "Reports", icon: <FileText size={18} />, href: "/dashboard/reports" },
+    { name: "Settings", icon: <Settings size={18} />, href: "/dashboard/settings" },
+  ];
+
   return (
-    <aside className="w-64 bg-panel backdrop-blur-xl border-r border-white/10 h-screen fixed left-0 top-0 p-6 flex flex-col">
-      
-      {/* Logo */}
-      <div className="flex items-center gap-3 mb-10">
-        <Shield className="text-indigo-400" size={28} />
-        <span className="text-xl font-semibold text-white">Guardian</span>
+    <div className="h-full flex flex-col p-5">
+      <div className="text-xl font-bold text-indigo-400 tracking-wide mb-8">
+        Guardian
       </div>
 
-      {/* Navigation */}
-      <nav className="space-y-3 text-slate-300">
-        <Link href="/dashboard" className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-white/5 transition">
-          <LayoutDashboard size={20} />
-          Dashboard
-        </Link>
-
-        <Link href="/alerts" className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-white/5 transition">
-          <Bell size={20} />
-          Alerts
-        </Link>
-
-        <Link href="/settings" className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-white/5 transition">
-          <Settings size={20} />
-          Settings
-        </Link>
+      <nav className="flex flex-col gap-2">
+        {menu.map((item, i) => (
+          <Link
+            key={i}
+            href={item.href}
+            className="flex items-center gap-3 px-4 py-2 rounded-lg text-slate-300 hover:bg-white/10 transition"
+          >
+            {item.icon}
+            <span>{item.name}</span>
+          </Link>
+        ))}
       </nav>
-    </aside>
+
+      <div className="mt-auto text-slate-500 text-xs px-4 pt-6">
+        Guardian Ops v1.0.0
+      </div>
+    </div>
   );
 }

@@ -1,31 +1,24 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import mapboxgl from "mapbox-gl";
+import Map, { Marker } from "react-map-gl";
 
-mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
-
-export default function MapBox({ sites = [], risks = [] }) {
-  const ref = useRef(null);
-
-  useEffect(() => {
-    if (!ref.current) return;
-
-    const map = new mapboxgl.Map({
-      container: ref.current,
-      style: "mapbox://styles/mapbox/dark-v11",
-      center: [31.0456, -17.8252],
-      zoom: 11,
-    });
-
-    sites.forEach((site) => {
-      new mapboxgl.Marker({ color: "#06b6d4" })
-        .setLngLat([site.lng, site.lat])
-        .addTo(map);
-    });
-
-    return () => map.remove();
-  }, [sites]);
-
-  return <div ref={ref} className="w-full h-full" />;
+export default function MapBox({ sites }) {
+  return (
+    <Map
+      mapboxAccessToken={process.env.NEXT_PUBLIC_MAPBOX_TOKEN}
+      initialViewState={{
+        latitude: sites?.[0]?.lat || 0,
+        longitude: sites?.[0]?.lng || 0,
+        zoom: 8,
+      }}
+      mapStyle="mapbox://styles/mapbox/dark-v11"
+      style={{ width: "100%", height: "100%" }}
+    >
+      {sites?.map((s, i) => (
+        <Marker key={i} latitude={s.lat} longitude={s.lng}>
+          <div className="w-3 h-3 bg-teal-400 rounded-full shadow-lg border border-white"></div>
+        </Marker>
+      ))}
+    </Map>
+  );
 }

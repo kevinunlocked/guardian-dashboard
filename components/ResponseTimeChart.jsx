@@ -2,18 +2,18 @@
 
 import { LineChart, Line, XAxis, YAxis, Tooltip } from "recharts";
 
-export default function ResponseTimeChart({ incidents = [] }) {
-  const data = incidents.map((i) => ({
-    name: i.site,
-    value: i.response_time_minutes,
+export default function ResponseTimeChart({ incidents }) {
+  const data = (incidents || []).map((i, idx) => ({
+    name: `Incident ${idx + 1}`,
+    minutes: i.response_time,
   }));
 
   return (
-    <LineChart width={260} height={200} data={data}>
-      <XAxis dataKey="name" hide />
-      <YAxis hide />
+    <LineChart width={300} height={250} data={data}>
+      <XAxis dataKey="name" stroke="#64748b" />
+      <YAxis stroke="#64748b" />
       <Tooltip />
-      <Line type="monotone" dataKey="value" stroke="#06b6d4" strokeWidth={2} />
+      <Line type="monotone" dataKey="minutes" stroke="#7c3aed" strokeWidth={2} />
     </LineChart>
   );
 }
