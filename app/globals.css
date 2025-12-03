@@ -2,25 +2,32 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ---- THEME VARIABLES ---- */
 :root {
-  --bg: #070b1a;
-  --panel: rgba(255, 255, 255, 0.03);
-  --card-bg: rgba(255, 255, 255, 0.04);
-  --border: rgba(255, 255, 255, 0.08);
+  --bg: #071026;
+  --panel: rgba(12,18,28,0.6);
+  --muted: #94a3b8;
+  --accent-from: #7c3aed;
+  --accent-to: #06b6d4;
+  --card-grad: linear-gradient(
+      135deg,
+      rgba(124, 58, 237, 0.15),
+      rgba(6, 182, 212, 0.08)
+  );
+  --glass: rgba(255,255,255,0.02);
 }
 
 body {
-  @apply bg-[#070b1a] text-slate-200 antialiased;
+  @apply bg-bg text-slate-200 antialiased;
 }
 
+/* Global reusable card */
 .card {
-  @apply bg-white/5 border border-white/10 rounded-xl p-4 shadow-lg backdrop-blur;
-}
-
-.btn {
-  @apply px-3 py-2 rounded-lg bg-gradient-to-r from-indigo-500 to-cyan-400 text-black font-semibold;
-}
-
-.small-btn {
-  @apply px-3 py-1.5 rounded-md bg-white/10 border border-white/10 text-slate-300 text-sm;
+  background: var(--card-grad);
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.04);
+  padding: 20px;
+  box-shadow:
+    0 6px 18px rgba(2,6,23,0.6),
+    0 0 40px rgba(124,58,237,0.15);
 }
