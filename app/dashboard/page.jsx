@@ -1,8 +1,8 @@
-import StatCard from "@/components/StatCard";
-import ChartCard from "@/components/ChartCard";
-import ResponseTimeChart from "@/components/ResponseTimeChart";
-import IncidentsByTypeChart from "@/components/IncidentsByTypeChart";
-import MapBox from "@/components/MapBox";
+import StatCard from "../../components/StatCard.jsx";
+import ChartCard from "../../components/ChartCard.jsx";
+import ResponseTimeChart from "../../components/ResponseTimeChart.jsx";
+import IncidentsByTypeChart from "../../components/IncidentsByTypeChart.jsx";
+import MapBox from "../../components/MapBox.jsx";
 
 export default function DashboardPage() {
   return (
