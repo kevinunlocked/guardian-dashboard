@@ -1,5 +1,6 @@
 'use client'
-import { useEffect, useState } from 'react'
+
+import React, { useEffect, useState } from 'react'
 import { Check, X, Cpu } from 'lucide-react'
 import { motion } from 'framer-motion'
 

@@ -1,4 +1,5 @@
 'use client'
+import React from "react";
 export default function ChartCard({ title, children }) {
   return (
     <div className="card" style={{ padding: 14 }}>

@@ -1,4 +1,6 @@
-'use client'
+"use client";
+import React from "react";
+
 import dynamic from 'next/dynamic'
 import StatCard from '../components/StatCard'
 import ChartCard from '../components/ChartCard'
