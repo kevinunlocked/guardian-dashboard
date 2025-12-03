@@ -2,22 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Better Card Styling */
-.card {
-  @apply bg-[#0d0d11] border border-white/10 rounded-xl shadow-md p-5;
+:root {
+  --bg: #070b1a;
+  --panel: rgba(255, 255, 255, 0.03);
+  --card-bg: rgba(255, 255, 255, 0.04);
+  --border: rgba(255, 255, 255, 0.08);
 }
 
-/* Buttons */
+body {
+  @apply bg-[#070b1a] text-slate-200 antialiased;
+}
+
+.card {
+  @apply bg-white/5 border border-white/10 rounded-xl p-4 shadow-lg backdrop-blur;
+}
+
 .btn {
-  @apply bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg text-sm font-medium;
+  @apply px-3 py-2 rounded-lg bg-gradient-to-r from-indigo-500 to-cyan-400 text-black font-semibold;
 }
 
 .small-btn {
-  @apply bg-white/10 hover:bg-white/20 text-white px-3 py-1.5 rounded-lg text-xs;
+  @apply px-3 py-1.5 rounded-md bg-white/10 border border-white/10 text-slate-300 text-sm;
 }
-
-/* Smooth layout spacing */
-.section-title {
-  @apply font-semibold text-sm text-slate-300 mb-3;
-}
-
