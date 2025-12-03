@@ -2,13 +2,14 @@ import "./globals.css";
 
 export const metadata = {
   title: "Guardian Dashboard",
-  description: "AI insights dashboard",
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className="min-h-screen">{children}</body>
+      <body className="bg-[#071026] text-slate-200 antialiased">
+        {children}
+      </body>
     </html>
   );
 }

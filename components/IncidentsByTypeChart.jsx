@@ -1,28 +1,25 @@
 "use client";
 
-import { PieChart, Pie, Cell, Tooltip } from "recharts";
+import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from "recharts";
 
-export default function IncidentsByTypeChart({ incidents }) {
-  const data = (incidents || []).reduce((acc, inc) => {
-    acc[inc.type] = (acc[inc.type] || 0) + 1;
-    return acc;
-  }, {});
+const data = [
+  { name: "Fire", value: 22 },
+  { name: "Medical", value: 18 },
+  { name: "Violence", value: 30 },
+  { name: "Accident", value: 14 },
+];
 
-  const formatted = Object.keys(data).map((key) => ({
-    name: key,
-    value: data[key],
-  }));
-
-  const COLORS = ["#7c3aed", "#06b6d4", "#eab308", "#ef4444"];
-
+export default function IncidentsByTypeChart() {
   return (
-    <PieChart width={250} height={250}>
-      <Pie data={formatted} dataKey="value" outerRadius={90}>
-        {formatted.map((_, i) => (
-          <Cell key={i} fill={COLORS[i % COLORS.length]} />
-        ))}
-      </Pie>
-      <Tooltip />
-    </PieChart>
+    <ResponsiveContainer width="100%" height="100%">
+      <PieChart>
+        <Pie data={data} dataKey="value" outerRadius={80} label>
+          {data.map((_, i) => (
+            <Cell key={i} fill={["#6366F1", "#0EA5E9", "#10B981", "#F59E0B"][i]} />
+          ))}
+        </Pie>
+        <Tooltip />
+      </PieChart>
+    </ResponsiveContainer>
   );
 }

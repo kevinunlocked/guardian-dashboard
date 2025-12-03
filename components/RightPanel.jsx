@@ -1,22 +1,18 @@
-"use client";
-
 export default function RightPanel() {
   return (
-    <div className="p-5 flex flex-col gap-4">
-      <div className="text-sm font-semibold text-slate-300">
-        Live Notifications
-      </div>
+    <div className="hidden xl:flex flex-col w-72 bg-[#0A1020]/70 backdrop-blur-xl border-l border-white/5 p-6">
+      <h2 className="text-lg font-semibold mb-4">Live Alerts</h2>
 
-      <div className="p-3 bg-white/5 border border-white/10 rounded-lg text-sm">
-        • Patrol unit Alpha-3 reported in.
-      </div>
+      <div className="space-y-4">
+        <div className="p-4 rounded-lg bg-white/5 border border-white/10">
+          <div className="text-sm font-semibold">🔥 Fire Incident</div>
+          <div className="text-xs text-slate-400">3 minutes ago</div>
+        </div>
 
-      <div className="p-3 bg-white/5 border border-white/10 rounded-lg text-sm">
-        • Camera #14 detected motion.
-      </div>
-
-      <div className="p-3 bg-white/5 border border-white/10 rounded-lg text-sm">
-        • AI analysis completed for Site Delta.
+        <div className="p-4 rounded-lg bg-white/5 border border-white/10">
+          <div className="text-sm font-semibold">🚨 Theft Report</div>
+          <div className="text-xs text-slate-400">9 minutes ago</div>
+        </div>
       </div>
     </div>
   );

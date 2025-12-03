@@ -1,19 +1,26 @@
 "use client";
 
-import { LineChart, Line, XAxis, YAxis, Tooltip } from "recharts";
+import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
 
-export default function ResponseTimeChart({ incidents }) {
-  const data = (incidents || []).map((i, idx) => ({
-    name: `Incident ${idx + 1}`,
-    minutes: i.response_time,
-  }));
+const data = [
+  { time: "1 AM", val: 4.2 },
+  { time: "3 AM", val: 5.0 },
+  { time: "6 AM", val: 6.1 },
+  { time: "9 AM", val: 4.8 },
+  { time: "12 PM", val: 3.6 },
+  { time: "3 PM", val: 4.9 },
+  { time: "6 PM", val: 5.5 },
+];
 
+export default function ResponseTimeChart() {
   return (
-    <LineChart width={300} height={250} data={data}>
-      <XAxis dataKey="name" stroke="#64748b" />
-      <YAxis stroke="#64748b" />
-      <Tooltip />
-      <Line type="monotone" dataKey="minutes" stroke="#7c3aed" strokeWidth={2} />
-    </LineChart>
+    <ResponsiveContainer width="100%" height="100%">
+      <LineChart data={data}>
+        <XAxis dataKey="time" stroke="#64748b" />
+        <YAxis stroke="#64748b" />
+        <Tooltip />
+        <Line type="monotone" dataKey="val" stroke="#6366F1" strokeWidth={2} />
+      </LineChart>
+    </ResponsiveContainer>
   );
 }
