@@ -1,25 +1,29 @@
+import "../globals.css";
 import Sidebar from "@/components/Sidebar";
-import Navbar from "@/components/Navbar";
+import TopNav from "@/components/TopNav";
+import RightPanel from "@/components/RightPanel";
 
 export default function DashboardLayout({ children }) {
   return (
-    <div className="flex min-h-screen bg-gray-50">
-      
+    <div className="flex w-full h-screen bg-gray-100 overflow-hidden">
+
       {/* Sidebar */}
       <Sidebar />
 
-      {/* Main content */}
-      <div className="flex-1 flex flex-col">
+      {/* Main Content Area */}
+      <div className="flex flex-col flex-1 overflow-hidden">
 
-        {/* Navbar */}
-        <Navbar />
+        {/* Top Navigation */}
+        <TopNav />
 
-        {/* Page content */}
-        <main className="p-6">
+        {/* Main Page Content */}
+        <main className="flex-1 overflow-y-auto p-6">
           {children}
         </main>
-
       </div>
+
+      {/* Right Side Panel */}
+      <RightPanel />
     </div>
   );
 }
