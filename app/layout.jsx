@@ -1,14 +1,14 @@
-import './globals.css'
-import React from "react";
+import './globals.css';
 
-
-export const metadata = { title: 'Guardian Dashboard — AI demo' }
+export const metadata = { title: 'Guardian Dashboard' }
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head />
-      <body>{children}</body>
+      <body>
+        {children}
+      </body>
     </html>
   )
 }
